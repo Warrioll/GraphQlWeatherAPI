@@ -37,7 +37,9 @@ export const getDataFromGeocodeMapsByAddress = async(address)=>{
 
 export const getDataFromWqaiByCoordinates = async(latitude, longtitude)=>{
     try{
+        console.log('lat, lom', latitude, longtitude)
         const response = await axios.get(`https://api.waqi.info/feed/geo:${latitude};${longtitude}/?token=${WAQI_KEY}`)
+        console.log('aqDAta', response.data)
         return response.data
     }catch(error){
         console.error('getDataFromWqaiByCoordinates ERROR', '\n', error)

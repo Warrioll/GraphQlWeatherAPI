@@ -5,8 +5,17 @@ import { airQuality, coordinates, address, weather } from './resolvers/resolvers
  
 
 const sdl = `
-  type Query {
-  coordinates(postalCode: Int = null, city: String = null, state: String = null, country: String = null, countryCode: String = null): Coordinates
+
+input inputAddress{
+ postalCode: Int = null
+ city: String = null
+ state: String = null
+ country: String = null
+ countryCode: String = null
+}
+
+type Query {
+  coordinates(address: inputAddress): Coordinates
   address(latitude: Float, longtitude: Float): Address
 
 }
@@ -57,7 +66,9 @@ type AirQuality{
 
 const resolvers = { 
     Query: {
-    coordinates: async (parent, args)=> await coordinates(args), 
+    coordinates: async (parent, args)=> {
+      const {address} =args
+      return await coordinates(address)}, 
     address: async(parent, args)=> await address(args)
     },
     

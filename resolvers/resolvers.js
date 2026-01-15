@@ -5,18 +5,18 @@ import { getDataFromGeocodeMapsByAddress,
 
 
 export const coordinates = async(args)=>{
-    try{
-        const addressDataArray= await getDataFromGeocodeMapsByAddress(args)
-        
+    try{ 
+        const address = args
+        const addressDataArray= await getDataFromGeocodeMapsByAddress(address)
         return {
             latitude:addressDataArray[0].lat,
             longtitude: addressDataArray[0].lon,
-        }
+        } 
      }catch(error){
         console.error('coordinates ERROR: ', error)
-        return null
+        return null 
     }
-}
+} 
 
 export const address = async(args)=>{
     try{
@@ -73,13 +73,13 @@ export const airQuality = async(args)=>{
         const {latitude, longtitude} = args;
         const airQualityData= await getDataFromWqaiByCoordinates(latitude, longtitude);
         return {
-            co: airQualityData.data.iaqi.co.v,
-            dewPoint: airQualityData.data.iaqi.dew.v,
-            pm25: airQualityData.data.iaqi.pm25.v,
-            pm10: airQualityData.data.iaqi.pm10.v,
-            no2: airQualityData.data.iaqi.no2.v,
+            co: airQualityData.data.iaqi?.co?.v,
+            dewPoint: airQualityData.data.iaqi?.dew?.v,
+            pm25: airQualityData.data.iaqi?.pm25?.v,
+            pm10: airQualityData.data.iaqi?.pm10?.v,
+            no2: airQualityData.data.iaqi?.no2?.v,
         }
-     }catch(error){
+     }catch(error){ 
         console.error('airQuality ERROR: ', error)
         return null
     }
