@@ -128,7 +128,6 @@ app.all(
   '/graphql',
   createHandler({
     schema: schema,
-    rootValue: resolvers,
   }),
 );
 
